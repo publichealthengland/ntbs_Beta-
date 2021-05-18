@@ -103,7 +103,7 @@ namespace ntbs_ui_tests.Steps
         public void ThenICanSeeTransferInformationValue(string value, string title)
         {
             var transferInformationElements = Browser.FindElements(By.ClassName("transfer-request-information"));
-            Assert.Contains($"{title}:\r\n{value}", transferInformationElements.Select(t => t.Text));
+            Assert.Contains(transferInformationElements, t => t.Text.Contains(title) && t.Text.Contains(value));
         }
         
         #endregion
@@ -116,7 +116,7 @@ namespace ntbs_ui_tests.Steps
             var tableColumnTitles = HtmlElementHelper.FindElementById(Browser, tableId).FindElement(By.TagName("thead"))
                 .FindElements(By.TagName("th")).Select(title => title.Text).ToArray();
             var expectedTitles = GetExpectedColumnsTitlesForTable(tableId);
-            Assert.Equal(tableColumnTitles, expectedTitles);
+            Assert.Equal(tableColumnTitles.Select(titles => titles.Replace("\n", "").Replace("\r", "")), expectedTitles);
         }
 
         [Then(@"I can see the correct labels for the '(.*)' overview section")]
@@ -198,7 +198,7 @@ namespace ntbs_ui_tests.Steps
         {
             return tableId switch
             {
-                "alerts-table" => new[] {"NTBS Id", "Alert date", "Alert type", "Case Manager\r\nTB Service", "Dismiss"},
+                "alerts-table" => new[] {"NTBS Id", "Alert date", "Alert type", "Case ManagerTB Service", "Dismiss"},
                 "draft-notifications-table" => new [] {"NTBS Id", "Name", "Date created", "TB Service", "Case Manager"},
                 "recent-notifications-table" => new [] {"NTBS Id", "Name", "Date notified", "TB Service", "Case Manager"}
             };
