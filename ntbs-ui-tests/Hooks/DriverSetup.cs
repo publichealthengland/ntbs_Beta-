@@ -73,14 +73,14 @@ namespace ntbs_ui_tests.Hooks
 
         private async Task CleanUpMigratedNotification()
         {
-            using (var connection = new SqlConnection(settings.EnvironmentConfig.ConnectionString))
+            await using (var connection = new SqlConnection(settings.EnvironmentConfig.ConnectionString))
             {
                 connection.Open();
                 var deleteNotification = "DELETE FROM Notification WHERE ETSID = '189045'";
                 await connection.ExecuteAsync(deleteNotification);
                 connection.Close();
             }
-            using (var connection = new SqlConnection(settings.EnvironmentConfig.MigrationConnectionString))
+            await using (var connection = new SqlConnection(settings.EnvironmentConfig.MigrationConnectionString))
             {
                 connection.Open();
                 var deleteImportedNotification = $"DELETE FROM {settings.EnvironmentConfig.ImportedNotificationTableName} WHERE LegacyId = '189045'";
