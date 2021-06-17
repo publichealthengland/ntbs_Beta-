@@ -256,6 +256,7 @@ namespace ntbs_service
                                 UsePageLocksOnDequeue = true,
                                 DisableGlobalLocks = true
                             })
+                        .UseSerilogLogProvider()
                         .UseConsole();
                 });
             }
