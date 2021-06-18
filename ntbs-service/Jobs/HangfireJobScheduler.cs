@@ -166,6 +166,12 @@ namespace ntbs_service.Jobs
             {
                 RecurringJob.RemoveIfExists(ReportingDataProcessingJobId);
             }
+
+            RecurringJob.AddOrUpdate<TestJob>(
+                "test",
+                job => job.Run(JobCancellationToken.Null),
+                "0 23 * * *",
+                TimeZoneInfo.Local);
         }
     }
 }
