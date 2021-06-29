@@ -111,6 +111,9 @@ metadata:
   annotations:
     kubernetes.io/ingress.class: addon-http-application-routing
     nginx.ingress.kubernetes.io/proxy-buffer-size: 16k
+    nginx.ingress.kubernetes.io/server-snippet: |
+        http2_max_header_size 16k;
+        http2_max_field_size 16k;
 spec:
   tls:
     - hosts:
