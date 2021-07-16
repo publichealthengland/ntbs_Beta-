@@ -31,5 +31,8 @@ namespace ntbs_service.Models.Entities
 
         [Display(Name = "XDR")]
         public string XDR { get; set; }
+
+        [Display(Name = "Match Method")]
+        public string MatchMethod { get; set; }
     }
 }

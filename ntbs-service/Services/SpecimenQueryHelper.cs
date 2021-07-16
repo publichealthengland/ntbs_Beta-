@@ -60,6 +60,7 @@ namespace ntbs_service.Services
                 ,[{nameof(MatchedSpecimen.LabName)}]
                 ,[{nameof(MatchedSpecimen.LabSex)}]
                 ,[{nameof(MatchedSpecimen.LabAddress)}]
+                ,[{nameof(MatchedSpecimen.MatchMethod)}]
             FROM [dbo].[ufnGetMatchedSpecimen] (@param)
             ORDER BY [{nameof(MatchedSpecimen.SpecimenDate)}] DESC";
 
